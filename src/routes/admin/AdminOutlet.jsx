@@ -5,7 +5,7 @@ function AdminOutlet() {
   if (adminJwt) {
     return <Outlet />;
   }
-  return <Navigate to="/" />;
+  return <Navigate to="/login" />;
 }
 
 export default AdminOutlet;

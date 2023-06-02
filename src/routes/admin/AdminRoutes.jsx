@@ -10,7 +10,7 @@ export default function AdminRoutes() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<AdminLogin />} />
+        <Route path="/login" element={<AdminLogin />} />
       </Routes>
       {token && (
         <div className="mt-5">
@@ -19,7 +19,7 @@ export default function AdminRoutes() {
       )}
 
       <Routes>
-        <Route path="*" element={<AdminOutlet />}>
+        <Route path="/" element={<AdminOutlet />}>
           <Route path="employees" element={<ManageUsers />} />
           <Route path=":empid/employee" element={<UserProfile />} />
         </Route>

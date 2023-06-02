@@ -32,7 +32,7 @@ export default function Header({ menuItem }) {
                 className="font-bold cursor-pointer"
                 onClick={() => {
                   localStorage.clear();
-                  navigate("/");
+                  navigate("/login");
                 }}
               >
                 Logout 📤
