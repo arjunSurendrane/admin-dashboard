@@ -27,7 +27,7 @@ export default function AdminLogin() {
       console.log(res);
       await localStorage.setItem("adminJwt", res?.data?.token);
       await localStorage.setItem("role", "admin");
-      navigate("/employees");
+      navigate("/");
     } catch (error) {
       console.log(error);
       const message = error?.response?.data?.message;

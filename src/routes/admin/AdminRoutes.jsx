@@ -14,13 +14,13 @@ export default function AdminRoutes() {
       </Routes>
       {token && (
         <div className="mt-5">
-          <Header menuItem={[{ name: "Employees", link: "/employees" }]} />
+          <Header menuItem={[{ name: "Employees", link: "/" }]} />
         </div>
       )}
 
       <Routes>
         <Route path="/" element={<AdminOutlet />}>
-          <Route path="employees" element={<ManageUsers />} />
+          <Route path="" element={<ManageUsers />} />
           <Route path=":empid/employee" element={<UserProfile />} />
         </Route>
       </Routes>
