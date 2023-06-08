@@ -11,6 +11,7 @@ const urls = {
   listAllEmployees: "/employee",
   createEmployee: "/auth/employee/signup",
   addRating: "/task/:id/rating",
+  deleteEmployee: "/employee/:id",
 };
 
 export const sendRequest = async ({
@@ -21,7 +22,6 @@ export const sendRequest = async ({
   method,
 }) => {
   let url = urls[link];
-  console.log(urls[link], url);
   if (id) url = url.replace(":id", id);
   if (method == "get") {
     const res = await axios.get(url, {

@@ -53,7 +53,6 @@ export default function AddUser({
                       dataCollection["password"]
                     )
                       return setError("Password mismatch");
-                    console.log(dataCollection);
                     setError("");
                     submitData(dataCollection);
                   }}

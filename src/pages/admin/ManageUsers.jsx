@@ -17,19 +17,28 @@ export default function ManageUsers() {
     mutate,
   } = useSWR({ method: "get", token, link: "listAllEmployees" }, sendRequest);
 
-  const submitData = async (data) => {
+  const submitData = async (data, deleteUser = false) => {
     setLoading(true);
     try {
-      console.log({ data });
-      const res = await sendRequest({
-        link: "createEmployee",
-        token,
-        method: "post",
-        data,
-      });
-      console.log({ res });
-      mutate();
-      setOpen(false);
+      if (!deleteUser) {
+        const res = await sendRequest({
+          link: "createEmployee",
+          token,
+          method: "post",
+          data,
+        });
+        mutate();
+        setOpen(false);
+      } else {
+        const res = await sendRequest({
+          link: "deleteEmployee",
+          token,
+          id: data,
+          method: "delete",
+        });
+        mutate();
+        setOpen(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -41,9 +50,7 @@ export default function ManageUsers() {
   } else if (error) {
     console.log("error");
   } else {
-    console.log(user);
     const employees = user?.data?.data?.employees;
-    console.log({ employees });
     return (
       <>
         <div className="p-10">
@@ -65,7 +72,10 @@ export default function ManageUsers() {
               </a>
             </div>
             <div className="mt-5">
-              <Users data={employees} />
+              <Users
+                data={employees}
+                deleteUser={(data) => submitData(data, true)}
+              />
             </div>
           </div>
         </div>
