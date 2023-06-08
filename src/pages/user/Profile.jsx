@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import OverallRating from "../../components/OverallRating";
 import Salary from "../../components/Salary";
@@ -15,6 +15,7 @@ export default function Profile() {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [errors, setError] = useState("");
+  const navigate = useNavigate();
   const role = localStorage.getItem("role");
   const [loading, setLoading] = useState(false);
   const { empid: id } = useParams();
@@ -41,6 +42,7 @@ export default function Profile() {
       mutate();
     } catch (error) {
       console.log(error);
+      alert("Something gone wrong!!! try again...");
     }
   };
 
@@ -90,7 +92,9 @@ export default function Profile() {
   if (isLoading) {
     console.log("loading...");
   } else if (error) {
-    console.log("error");
+    alert("Something gone wrong!!!");
+    localStorage.clear();
+    navigate("/login");
   } else {
     console.log("success");
     const userData = response?.data?.data;

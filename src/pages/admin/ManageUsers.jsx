@@ -4,12 +4,14 @@ import useSWR from "swr";
 import { sendRequest } from "../../api";
 import Header from "../../components/Header";
 import AddUser from "../../components/AddUser";
+import { useNavigate } from "react-router-dom";
 
 export default function ManageUsers() {
   const token = localStorage.getItem("adminJwt");
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const {
     isLoading,
     error,
@@ -41,6 +43,7 @@ export default function ManageUsers() {
       }
     } catch (error) {
       console.log(error);
+      alert("Something gone wrong!!! try again...");
     }
     setLoading(false);
   };
@@ -48,7 +51,9 @@ export default function ManageUsers() {
   if (isLoading) {
     console.log("loading...");
   } else if (error) {
-    console.log("error");
+    alert("Something gone wrong!!!");
+    localStorage.clear();
+    navigate("/login");
   } else {
     const employees = user?.data?.data?.employees;
     return (
